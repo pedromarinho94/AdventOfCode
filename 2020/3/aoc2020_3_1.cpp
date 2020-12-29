@@ -36,33 +36,36 @@ void count_trees(const std::string &input)
     static int last_pos{RIGHT};
     static int i{0}, nr_trees{0};
     
-    std::cout << "at [" << line << ";" << i << "]" << std::endl;
-    
     //count tree at +[3;1]    
     if( input.at(i) == '#' && line!=0 && flag==false)
     {
         nr_trees++;
         std::cout << "▲ nr:" << nr_trees << " at [" << line << ";" << i << "]" << std::endl;
-    }      
+    }     
+    else if (flag == false)
+    {
+        //std::cout << "at [" << line << ";" << i << "]" << std::endl;
+    } 
     
     // go left 3 times
     for(int j=i+last_pos; i<j; i++)
-    {        
+    {   
+        //abrupt line change     
         if ( i == input.size()-1 )
         {   
             last_pos = j-i-1;
             i=0;
             line++;
             flag=true;
-            std::cout << "c:forward" << std::endl;
-            std::cout << "c:down" << std::endl;
+            //std::cout << "c:forward" << std::endl;
+            //std::cout << "c:down" << std::endl;
             return;
         }
         else
         {
             last_pos = RIGHT;
         }
-    std::cout << "forward" << std::endl;
+    //std::cout << "forward" << std::endl;
     }
     
     //count tree at +[3;1] after abrupt line change
@@ -76,7 +79,7 @@ void count_trees(const std::string &input)
         // go left 3 times
         for(int j=i+last_pos; i<j; i++)
         {        
-            std::cout << "p:forward" << std::endl;
+            //std::cout << "p:forward" << std::endl;
         }
     }     
     
@@ -84,18 +87,19 @@ void count_trees(const std::string &input)
     //position check at +[3;1] after abrupt line change
     if( input.at(i) != '#' && line!=0 && flag == true)
     {   
-        std::cout << "pp:at [" << line << ";" << i << "]" << std::endl;
+        //std::cout << "pp:at [" << line << ";" << i << "]" << std::endl;
         last_pos = RIGHT;
         flag=false;
         
         // go left 3 times
         for(int j=i+last_pos; i<j; i++)
         {        
-            std::cout << "pp:forward" << std::endl;
+            //std::cout << "pp:forward" << std::endl;
         }
     }   
     
-    std::cout << "down" << std::endl;   
+    //next line
+    //std::cout << "down" << std::endl;   
     line++;
     return;
 }
