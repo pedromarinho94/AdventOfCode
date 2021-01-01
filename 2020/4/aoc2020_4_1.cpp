@@ -46,28 +46,45 @@ int main(int argc, char *argv[])
 
 void validation(std::vector<std::string> &passports, std::vector<std::string> &keys)
 {
-    //Hash Map
-    std::unordered_map<std::string, std::string> base_hash_map;
+    std::unordered_map<std::string, std::string> valid_keys_hash_map;
+    int valid_nr{0};
     
-    //vector of hash tables
-    std::vector<std::unordered_map<std::string, std::string>> passports_map;
-     
     for (auto key: keys)
     {
         if (key != "cid")
-            base_hash_map[key];
+            valid_keys_hash_map[key];
     }
-    
-    for (auto n: base_hash_map)
-    {
-        std::cout << "Key:[" << n.first << "] Value:[" << n.second << "]" << std::endl;
-    }
+
+    for (auto passport: passports)
+    {   
+        //std::cout << passport << std::endl;
         
-//    for (auto passport: passports)
-//    {
-//        std::cout << passport << std::endl;
-//    }  
-      
+        bool valid{true};
+    
+        for (auto key: valid_keys_hash_map)
+        {
+            if (passport.find(key.first) != std::string::npos)
+            {
+                //std::cout << "[" << key.first << "] found!" << std::endl;
+            }
+            else
+            {
+                //std::cout << "[" << key.first << "] not found!" << std::endl;
+                valid = false;
+            }
+        }
+        
+        if(valid)
+        {
+            //std::cout << "Is valid!" << std::endl;
+            valid_nr++;
+        }
+        else
+        {
+            //std::cout << "Is NOT valid!" << std::endl;
+        }
+    }  
+    std::cout << "Nr of valid passports: " << valid_nr << std::endl; 
 }
 
 std::vector<std::string> get_keys(const std::vector<std::string> &passports)
